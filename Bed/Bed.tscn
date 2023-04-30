@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://dd8lw4d4hkibt"]
+
+[ext_resource type="Texture2D" uid="uid://cuu65rslmmhpt" path="res://Bed/Empty Bed.png" id="1_gwspt"]
+[ext_resource type="Script" path="res://Bed/Bed.gd" id="1_ilkc5"]
+[ext_resource type="Texture2D" uid="uid://cydnken2xoh0v" path="res://Bed/Mum (6).png" id="2_bpi5j"]
+[ext_resource type="AudioStream" uid="uid://dd8jknevpowhb" path="res://Delivery.mp3" id="4_1qqi3"]
+[ext_resource type="AudioStream" uid="uid://b2ct4iixk2ial" path="res://BabyCry.mp3" id="5_c0o73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjn0j"]
+size = Vector2(176, 129)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8ygk"]
+bg_color = Color(0.0627451, 0.72549, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_scl0f"]
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+
+[node name="Bed" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource("1_ilkc5")
+
+[node name="BedSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_gwspt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -27.5)
+shape = SubResource("RectangleShape2D_sjn0j")
+
+[node name="MumSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_bpi5j")
+hframes = 3
+vframes = 5
+
+[node name="InitialOcupationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProgressBarBaby" type="ProgressBar" parent="."]
+offset_left = -128.0
+offset_top = -131.0
+offset_right = 128.0
+offset_bottom = -104.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_t8ygk")
+show_percentage = false
+
+[node name="PainLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -177.0
+offset_right = 20.0
+offset_bottom = -151.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_scl0f")
+horizontal_alignment = 1
+
+[node name="Delivery" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1qqi3")
+
+[node name="BabyCry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_c0o73")
+
+[connection signal="timeout" from="InitialOcupationTimer" to="." method="_on_initial_ocupation_timeout"]
+[connection signal="finished" from="Delivery" to="." method="_on_delivery_finished"]

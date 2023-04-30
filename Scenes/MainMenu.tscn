@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://6bm20qcptdq5"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_fyh8k"]
+[ext_resource type="Texture2D" uid="uid://dipge71l6oomo" path="res://Scenes/HelpMum.png" id="1_t8p2f"]
+[ext_resource type="Texture2D" uid="uid://f5kvanjje1nc" path="res://Scenes/BabyCrib.png" id="2_fbvia"]
+[ext_resource type="AudioStream" uid="uid://bq8p8vju8xati" path="res://Music2.mp3" id="4_oo2cv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_40pay"]
+font_size = 128
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dovj"]
+bg_color = Color(0.0470588, 0.25098, 0.345098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vuwvb"]
+font_size = 22
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_fyh8k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = -16.0
+offset_right = 1904.0
+offset_bottom = 1080.0
+text = "
+Crazy Baby Delivery"
+label_settings = SubResource("LabelSettings_40pay")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -160.0
+offset_right = -48.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+text = "Start Game"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = 296.0
+offset_top = 376.0
+offset_right = 1664.0
+offset_bottom = 864.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2dovj")
+
+[node name="HelpMum" type="Sprite2D" parent="CanvasLayer/Panel"]
+position = Vector2(448, 304)
+texture = ExtResource("1_t8p2f")
+
+[node name="BabyCrib" type="Sprite2D" parent="CanvasLayer/Panel"]
+position = Vector2(960, 296)
+texture = ExtResource("2_fbvia")
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1223.0
+offset_bottom = 120.0
+text = "Provide Pain relieve to the mums (when they have red exclamation marks over their head) and take the babies to the crib. 
+If one of the mums is in too much pain before the baby is born, the game will end. 
+The babies are born when the progress bar is full. "
+label_settings = SubResource("LabelSettings_vuwvb")
+
+[node name="StaticLabel2" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -80.0
+offset_right = -7.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ludum Dare 53
+Crazy Baby Delivery
+@pauvictor"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oo2cv")
+volume_db = -10.0
+autoplay = true
+stream_paused = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

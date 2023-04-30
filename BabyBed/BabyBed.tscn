@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dej8kjycq5l3i"]
+
+[ext_resource type="Script" path="res://BabyBed/BabyBed.gd" id="1_7qdob"]
+[ext_resource type="Texture2D" uid="uid://bwp0p7uuwkp74" path="res://BabyBed/BabyBed.png" id="1_ep5n2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7gcg"]
+size = Vector2(200, 87)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e6veo"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.16
+gravity = Vector3(0, 30, 0)
+initial_velocity_max = 556.98
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = 180.0
+angle_max = 180.0
+scale_min = 2.0
+scale_max = 5.0
+hue_variation_max = 0.52
+
+[node name="BabyBed" type="StaticBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 3
+script = ExtResource("1_7qdob")
+
+[node name="BedSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ep5n2")
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_r7gcg")
+
+[node name="SuccessParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -45)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_e6veo")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.22
+
+[node name="SuccessTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ParticleTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="SuccessTimer" to="." method="_on_success_timer_timeout"]
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

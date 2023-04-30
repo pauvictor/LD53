@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3ngjnywqf3xa"]
+
+[ext_resource type="Script" path="res://Scenes/game.gd" id="1_smfvn"]
+[ext_resource type="PackedScene" uid="uid://dd8lw4d4hkibt" path="res://Bed/Bed.tscn" id="1_w5tdj"]
+[ext_resource type="PackedScene" uid="uid://dej8kjycq5l3i" path="res://BabyBed/BabyBed.tscn" id="2_0mk3k"]
+[ext_resource type="PackedScene" uid="uid://bcoqvp70l3rt2" path="res://Doctor/Doctor.tscn" id="3_u00v1"]
+[ext_resource type="AudioStream" uid="uid://bq8p8vju8xati" path="res://Music2.mp3" id="5_oekg3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ooxbd"]
+font_size = 32
+
+[node name="GameNode" type="Node2D" groups=["gameNode"]]
+script = ExtResource("1_smfvn")
+
+[node name="Bed1" parent="." instance=ExtResource("1_w5tdj")]
+position = Vector2(256, 376)
+
+[node name="Bed2" parent="." instance=ExtResource("1_w5tdj")]
+position = Vector2(704, 376)
+
+[node name="Bed3" parent="." instance=ExtResource("1_w5tdj")]
+position = Vector2(1215, 376)
+
+[node name="Bed4" parent="." instance=ExtResource("1_w5tdj")]
+position = Vector2(1643, 368)
+
+[node name="BabyBed" parent="." instance=ExtResource("2_0mk3k")]
+position = Vector2(256, 800)
+
+[node name="BabyBed2" parent="." instance=ExtResource("2_0mk3k")]
+position = Vector2(704, 800)
+
+[node name="BabyBed3" parent="." instance=ExtResource("2_0mk3k")]
+position = Vector2(1215, 800)
+
+[node name="BabyBed4" parent="." instance=ExtResource("2_0mk3k")]
+position = Vector2(1643, 809)
+
+[node name="Doctor" parent="." instance=ExtResource("3_u00v1")]
+position = Vector2(442, 595)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionLabel" type="Label" parent="CanvasLayer"]
+offset_left = 41.0
+offset_top = 108.0
+offset_right = 363.0
+offset_bottom = 131.0
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 41.0
+offset_top = 20.0
+offset_right = 81.0
+offset_bottom = 43.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_ooxbd")
+
+[node name="BabiesDeliveredLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -405.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "Babies delivered:"
+label_settings = SubResource("LabelSettings_ooxbd")
+
+[node name="StaticLabel2" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ludum Dare 53
+Crazy Baby Delivery
+@pauvictor"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oekg3")
+volume_db = -12.0
+autoplay = true

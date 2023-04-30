@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcoqvp70l3rt2"]
+
+[ext_resource type="Script" path="res://Doctor/Doctor.gd" id="1_g86gp"]
+[ext_resource type="Texture2D" uid="uid://c3wxg1py8smkf" path="res://Doctor/Doctor.png" id="1_panih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtv71"]
+size = Vector2(128, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6o1w"]
+size = Vector2(200, 278)
+
+[node name="Doctor" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+motion_mode = 1
+script = ExtResource("1_g86gp")
+
+[node name="DoctorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_panih")
+hframes = 2
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 56)
+shape = SubResource("RectangleShape2D_qtv71")
+
+[node name="InteractionDetection" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetection"]
+position = Vector2(-8, 7)
+shape = SubResource("RectangleShape2D_a6o1w")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[connection signal="body_entered" from="InteractionDetection" to="." method="_on_interaction_detection_body_entered"]
+[connection signal="body_exited" from="InteractionDetection" to="." method="_on_interaction_detection_body_exited"]

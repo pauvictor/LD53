@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmewlirgng3wy"]
+
+[ext_resource type="Script" path="res://Scenes/gameOver.gd" id="1_jjcpy"]
+[ext_resource type="Texture2D" uid="uid://cuu65rslmmhpt" path="res://Bed/Empty Bed.png" id="1_wv7pr"]
+[ext_resource type="Texture2D" uid="uid://cydnken2xoh0v" path="res://Bed/Mum (6).png" id="2_r1y3e"]
+[ext_resource type="AudioStream" uid="uid://bq8p8vju8xati" path="res://Music2.mp3" id="4_bsa7f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fd2n0"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_leq1o"]
+font_size = 32
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_jjcpy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_fd2n0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmptyBed" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(959, 747)
+texture = ExtResource("1_wv7pr")
+
+[node name="Mum(6)" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(958, 747)
+texture = ExtResource("2_r1y3e")
+hframes = 3
+vframes = 5
+frame = 9
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.0
+offset_top = -205.0
+offset_right = -80.9999
+offset_bottom = -174.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+text = "Back to main menu"
+
+[node name="StaticLabel2" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ludum Dare 53
+Crazy Baby Delivery
+@pauvictor"
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 280.0
+offset_top = 105.0
+offset_right = 375.0
+offset_bottom = 153.0
+text = "High Score:"
+label_settings = SubResource("LabelSettings_leq1o")
+
+[node name="BabiesDeliveredLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1640.0
+offset_top = 153.0
+offset_right = -1203.0
+offset_bottom = 201.0
+grow_horizontal = 0
+text = "Maximum Babies delivered: "
+label_settings = SubResource("LabelSettings_leq1o")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bsa7f")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
